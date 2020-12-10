@@ -21,10 +21,15 @@ class Pokedex extends Component {
         })
 
     }
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         if (this.state.pokemonName === '') {
             return
         }
+
+        if (prevState.pokemonNName === this.state.pokemonName) {
+            return
+        }
+        
         Axios.get(`https://pokeapi.co/api/v2/pokemon/${this.state.pokemonName}`)
         .then((res) => {
             this.setState({
